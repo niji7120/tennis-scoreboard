@@ -23,10 +23,20 @@
   --panel-bg: rgba(5,8,20,0.99);
 }
 
-/* 세로 모드 안내 */
+/* 가로 모드 강제 */
+#rotate-msg { display:none !important; }
+
 @media (orientation: portrait) {
-  #rotate-msg { display:flex !important; }
-  #main, #ctrl-panel, #winner-screen { display:none !important; }
+  body {
+    transform: rotate(90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
 }
 
 html, body {
@@ -690,6 +700,12 @@ function flashStatus(msg, dur=1500) {
 
 // 초기 렌더
 render();
+
+// 주소창 자동 숨기기
+setTimeout(function() { window.scrollTo(0, 1); }, 300);
+window.addEventListener('orientationchange', function() {
+  setTimeout(function() { window.scrollTo(0, 1); }, 500);
+});
 </script>
 </body>
 </html>
